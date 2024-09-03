@@ -6,19 +6,26 @@ import {
 } from '@edx/frontend-platform';
 import { AppProvider, ErrorPage } from '@edx/frontend-platform/react';
 import ReactDOM from 'react-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Header from '@edx/frontend-component-header';
 import FooterSlot from '@openedx/frontend-slot-footer';
 import messages from './i18n';
-import ExamplePage from './example/ExamplePage';
+
+import store from './common/store';
+import { CatalogPage } from './catalog/CatalogPage';
 
 import './index.scss';
 
 subscribe(APP_READY, () => {
   ReactDOM.render(
-    <AppProvider>
+    <AppProvider store={store}>
       <Header />
-      <ExamplePage />
+      <main>
+        <Routes>
+          <Route path="/" element={<CatalogPage />} />
+        </Routes>
+      </main>
       <FooterSlot />
     </AppProvider>,
     document.getElementById('root'),
